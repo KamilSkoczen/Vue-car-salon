@@ -1,6 +1,6 @@
 <template>
     <button :class="type">
-        <slot></slot>
+        <slot/>
     </button>
 </template>
 
@@ -14,7 +14,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import "src/scss/variables.scss";
+@import "@@/scss/variables.scss";
 button{
     text-transform: uppercase;
     padding:12px 32px;

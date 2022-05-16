@@ -3,15 +3,15 @@
 
         <p class="reservation-number">Rezerwacja nr {{getExactNumber}}</p>
 
-        <p class="reservation-status" :class="changeStatusIdtoName == 'Nowe' ? 'new' : ''">{{changeStatusIdtoName}}</p>
+        <p class="reservation-status" :class="complaint.status == 'Nowe' ? 'new' : ''">{{complaint.status}}</p>
 
-        <p>{{complaint.user.name}}</p>
+        <p>{{complaint.name}}</p>
         
         <p>{{getNumberWithSpaces}}</p>
 
         <p>Wizyta w dniu: {{getCleanDate}} o godz. {{getCleanHour}}</p>
 
-        <div class="btns-wrapper" v-if="changeStatusIdtoName == 'Nowe'">
+        <div class="btns-wrapper" v-if="complaint.status == 'Nowe'">
             <base-button>Oznacz jako zrealizowane</base-button>
 
             <base-button type="secondary">Odmów wizytę</base-button>
@@ -22,7 +22,7 @@
 
 
 <script>
-
+import dayjs from "dayjs"
 export default {
     props: {
         complaint: Object,
@@ -36,16 +36,10 @@ export default {
             return exactNumber
         },
         getCleanDate() {
-            const date = new Date(this.complaint.reservation_date)
-            const cleanDate = ("0" + date.getDate()).slice(-2) + '.' + ("0" + (date.getMonth() + 1)).slice(-2) + '.' + ("0" + date.getYear()).slice(-2)
-
-            return cleanDate
+            return dayjs(this.complaint.reservation_date).format('DD.MM.YYYY')
         },
         getCleanHour() {
-            const date = new Date(this.complaint.reservation_date)
-            const cleanDate = ("0" + (date.getHours() + 1)).slice(-2) + ':' + ("0" + (date.getMinutes() + 1)).slice(-2)
-
-            return cleanDate
+            return dayjs(this.complaint.reservation_date).format('HH:mm')
         },
         getNumberWithSpaces() {
             const phoneNumber = this.complaint.user.phone
@@ -54,25 +48,8 @@ export default {
             return spacedPhoneNumber
         },
         checkIfRefused() {
-            return this.complaint.status === "3" ? 'refused' : ''
-        },
-        changeStatusIdtoName(){
-            const itemStatusID = this.complaint.status;
-            let itemStatusName;
-            const arrayOfStatuses = this.statuses
-
-            const statusesMap = new Map(
-                arrayOfStatuses.map(object => {
-                    return [object.id, object.name];
-                }),
-                );
-
-            for (let[id,name] of statusesMap){
-                if (itemStatusID == id) {
-                    itemStatusName = name
-                }
-            }
-            return itemStatusName
+            const rejectedStatusId = "3"
+            return this.complaint.status === rejectedStatusId ? 'refused' : ''
         }
     }
 }
@@ -80,7 +57,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import "src/scss/variables.scss";
+@import "@@/scss/variables.scss";
 
 .card-wrapper {
     padding:16px;

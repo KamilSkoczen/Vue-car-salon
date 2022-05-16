@@ -5,13 +5,14 @@
 
             <h1>Jazdy testowe</h1>
 
-            <drivers-filters :statuses="statuses" @filter="fiterDrives" :activeFilter="activeFilter"></drivers-filters>
+            <drivers-filters :statuses="statuses" @filter="activeFilter=$event" :activeFilter="activeFilter"/>
         </section>
 
         <section class="drives-section">
             <p v-if="!isLoaded" class="loading-message">Loading...</p>
-            <drives-list :complaints="complaints" :statuses="statuses"></drives-list>
-            <p v-if="complaints.length == 0 && isLoaded" class="not-found">Results not found</p>
+            <drives-list v-else :complaints="fiterDrives" :statuses="statuses"/>
+            <p v-if="fiterDrives.length == 0 && isLoaded" class="not-found">Results not found</p>
+            <p v-if="isError" class="not-found">ERROR! Could not load the data.</p>
         </section>
     </section>
 
@@ -20,7 +21,7 @@
 <script>
 import DriversFilters from '@/components/DrivesListComponents/DrivesFilters.vue'
 import DrivesList from '@/components/DrivesListComponents/DrivesList.vue'
-import * as dbConnections from '@/services/dbconnection.js'
+import {fetchsStatuses, fetchComplaints} from '@/services/complainService.js'
 
 
 export default {
@@ -32,32 +33,44 @@ export default {
         return {
             statuses: [],
             complaints: [],
-            primaryComplaints:[],
-            activeFilter: "all",
-            isLoaded:false
+            activeFilter: 'Wszystkie',
+            isLoaded:false,
+            isError:false,
         }
     },
     methods:{
-        fiterDrives(status) {
-            this.activeFilter = status
-
-            if(status === 'all') return this.complaints = this.primaryComplaints
-
-            this.complaints = this.primaryComplaints
-
-            let filteredComplaints = this.complaints.filter((complaint)=>{
-                return complaint.status == status
+        changeStatusIdtoName(complaints,statuses){
+                const statusesMap = new Map(
+                    statuses.map(status => {
+                        return [status.id, status.name];
+                    }),
+                );
+                complaints.forEach(complaint=>{
+                    complaint.status = statusesMap.get(parseInt(complaint.status))
+                })
+                return complaints
+            }
+    },
+    computed:{
+        fiterDrives() {
+            if(this.activeFilter === 'Wszystkie' ) return this.complaints
+            return this.complaints.filter((complaint) => {
+                return complaint.status == this.activeFilter
             })
-
-            this.complaints = filteredComplaints
         }
     },
-    async mounted() {
-        this.statuses = await dbConnections.fetchsStatuses()
-        this.complaints = await dbConnections.fetchComplaints().then(
-            this.isLoaded = true
-        )
-        this.primaryComplaints = this.complaints
+    async created() {
+        try {
+            this.statuses = await fetchsStatuses()
+            this.complaints = await fetchComplaints()
+
+            this.changeStatusIdtoName(this.complaints,this.statuses)
+            
+        } catch(err) {
+            this.isError = true
+        }
+
+        this.isLoaded = true
     }
 }
 </script>
@@ -86,7 +99,7 @@ export default {
     font-weight: bold;
     text-align: center;
     font-size: 24px;
-}
+    }
 }
 
 </style>

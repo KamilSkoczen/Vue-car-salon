@@ -15,7 +15,6 @@ const router = createRouter({
         {path: '/find-a-dealer', component: FindDealer},
         {path: '/search', component: TheSearch},
         {path: '/:notFound(.*)', component: NotFound},
-
     ]
 })
 

@@ -23,7 +23,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import "src/scss/variables.scss";
+@import "@@/scss/variables.scss";
 ul {
     list-style: none;
     padding:0;

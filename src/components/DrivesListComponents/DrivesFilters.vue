@@ -1,7 +1,11 @@
 <template>
     <ul>
-        <li @click="$emit('filter','all')" key="all" :class="isFilterActive('all')">Wszystkie</li>
-        <li v-for="status in statuses" :key="status.id" @click="$emit('filter', status.id)" :class="isFilterActive(status.id)">{{status.name}}</li>
+        <li v-for="status in statuses" 
+        :key="status.id" 
+        @click="$emit('filter', status.name)" 
+        :class="isFilterActive(status.name)">
+        {{status.name}}
+        </li>
     </ul>
 </template>
 
@@ -9,12 +13,12 @@
 <script>
 export default {
     props:{
-    statuses: Object,
-    activeFilter: String
+        statuses: Object,
+        activeFilter: String
     },
     methods:{
         isFilterActive(status) {         
-            return this.activeFilter === status ? 'active':'nie'
+            return this.activeFilter === status ? 'active':''
         }
     },
 }
@@ -22,7 +26,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import "src/scss/variables.scss";
+@import "@@/scss/variables.scss";
 
 ul {
     list-style: none;

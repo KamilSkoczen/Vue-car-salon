@@ -37,7 +37,7 @@ body,p,h1,h2,h3,ul {
     max-width: 1110px;
     margin:auto;
     
-    @media screen and (max-width:$breakpoint-mobile){
+    @media screen and (max-width:$breakpoint-mobile) {
         margin: 0 15px;
     }
 }

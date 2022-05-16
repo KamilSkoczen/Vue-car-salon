@@ -52,14 +52,14 @@ export default {
     },
     computed: {
         toggleExpandableMenu(){
-            return  this.isMenuExpanded === true ? 'expanded':''
+            return  this.isMenuExpanded ? 'expanded':''
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-@import "src/scss/variables.scss";
+@import "@@/scss/variables.scss";
 
 header {
     background-color: $dark-navy-blue;
