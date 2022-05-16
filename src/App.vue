@@ -1,26 +1,44 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <the-header></the-header>
+  <router-view></router-view>
+  <the-footer></the-footer>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
+// Design https://projects.invisionapp.com/share/FT12O2SKYS9A#/screens/466686552
+
+import TheHeader from './components/layout/TheHeader.vue'
+import TheFooter from './components/layout/TheFooter.vue'
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  components:{
+    TheHeader,
+    TheFooter
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss">
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+@import "src/scss/variables.scss";
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Roboto", sans-serif;
+}
+
+body,p,h1,h2,h3,ul {
+  margin: 0;
+}
+
+.main-container {
+    max-width: 1110px;
+    margin:auto;
+    
+    @media screen and (max-width:$breakpoint-mobile){
+        margin: 0 15px;
+    }
 }
 </style>
