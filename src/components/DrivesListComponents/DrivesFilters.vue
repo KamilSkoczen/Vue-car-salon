@@ -8,7 +8,10 @@
 
 <script>
 export default {
-    props:["statuses","activeFilter"],
+    props:{
+    statuses: Object,
+    activeFilter: String
+    },
     methods:{
         isFilterActive(status) {         
             return this.activeFilter === status ? 'active':'nie'

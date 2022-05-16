@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import DrivesList from './pages/DrivesList.vue'
+import DrivesList from './pages/DrivesListView.vue'
 import FindDealer from './pages/FindDealer.vue'
 import NotFound from './pages/NotFound.vue'
 import TheHome from './pages/TheHome.vue'

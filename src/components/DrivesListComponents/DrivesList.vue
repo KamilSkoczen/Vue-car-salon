@@ -14,8 +14,10 @@ import SingleDrive from './SingleDrive.vue';
 
 export default {
     components: { SingleDrive },
-    props:['complaints','statuses'],
-
+    props:{
+        complaints:Object,
+        statuses:Object
+    }
 }
 </script>
 
