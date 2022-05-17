@@ -19,8 +19,9 @@ export default {
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500&display=swap');
 @import "src/scss/variables.scss";
+
 * {
   box-sizing: border-box;
 }
@@ -34,11 +35,8 @@ body,p,h1,h2,h3,ul {
 }
 
 .main-container {
-    max-width: 1110px;
+    max-width: 790px;
     margin:auto;
     
-    @media screen and (max-width:$breakpoint-mobile) {
-        margin: 0 15px;
-    }
 }
 </style>

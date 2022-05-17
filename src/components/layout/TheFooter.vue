@@ -14,8 +14,11 @@ footer {
     
     p {
         text-transform: uppercase;
+        font-family: "Work Sans";
         font-size: 12px;
-        font-weight: bold;
+        font-weight: 500;
+        line-height: 14px;
+        letter-spacing: 1.71px;
     }
 }
 

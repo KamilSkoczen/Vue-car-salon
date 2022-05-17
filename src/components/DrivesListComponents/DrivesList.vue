@@ -27,11 +27,6 @@ export default {
 ul {
     list-style: none;
     padding:0;
-    li {
-        @media screen and (min-width:$breakpoint-mobile){
-            margin:0 15px;
-        }
-    }
 }
 
 </style>

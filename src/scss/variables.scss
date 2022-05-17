@@ -6,9 +6,31 @@ $breakpoint-mobile: 768px;
 $white:#ffffff;
 $milk-white:#f1f1f1;
 $box-shadow-white:#e5e5e5;
-$box-shadow-dark:#36363657;
+$box-shadow-dark:rgba(181,181,181,0.5);
 $black:#000000;
 $grayish:#c0c0c0;
 $light-gray:#8d8d8d;
 $mustard: #d8a016;
 $dark-navy-blue:#1f1e2e;
+
+//mixins
+
+@mixin nav-link {
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 1.71px;
+    text-transform: uppercase;
+    color:$white;
+    font-family: 'Work Sans';
+    font-weight: 500;
+}
+
+@mixin sub-nav-link {
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 1px;
+    color:$white;
+    font-family: 'Work Sans';
+    font-weight: 400;
+    text-transform: initial;
+}

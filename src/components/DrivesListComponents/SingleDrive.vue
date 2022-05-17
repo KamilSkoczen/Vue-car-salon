@@ -1,15 +1,21 @@
 <template>
     <div class="card-wrapper" :class="checkIfRefused">
+        <p class="reservation-number">Rezerwacja nr {{ getExactNumber }}</p>
 
-        <p class="reservation-number">Rezerwacja nr {{getExactNumber}}</p>
+        <p
+            class="reservation-status"
+            :class="complaint.status == 'Nowe' ? 'new' : ''"
+        >
+            {{ complaint.status }}
+        </p>
 
-        <p class="reservation-status" :class="complaint.status == 'Nowe' ? 'new' : ''">{{complaint.status}}</p>
+        <p class="reservation-details">{{ complaint.user.name }}</p>
 
-        <p>{{complaint.name}}</p>
-        
-        <p>{{getNumberWithSpaces}}</p>
+        <p class="reservation-details">{{ getNumberWithSpaces }}</p>
 
-        <p>Wizyta w dniu: {{getCleanDate}} o godz. {{getCleanHour}}</p>
+        <p class="reservation-details">
+            Wizyta w dniu: {{ getCleanDate }} o godz. {{ getCleanHour }}
+        </p>
 
         <div class="btns-wrapper" v-if="complaint.status == 'Nowe'">
             <base-button>Oznacz jako zrealizowane</base-button>
@@ -17,42 +23,44 @@
             <base-button type="secondary">Odmów wizytę</base-button>
         </div>
     </div>
-    
 </template>
 
 
 <script>
-import dayjs from "dayjs"
+import dayjs from "dayjs";
 export default {
     props: {
         complaint: Object,
-        statuses: Object
+        statuses: Object,
     },
-    computed:{
+    computed: {
         getExactNumber() {
-            const fullNumber = this.complaint.reservation_id
-            const exactNumber = fullNumber.substring(0, fullNumber.indexOf("/"));
+            const fullNumber = this.complaint.reservation_id;
+            const exactNumber = fullNumber.substring(
+                0,
+                fullNumber.indexOf("/")
+            );
 
-            return exactNumber
+            return exactNumber;
         },
         getCleanDate() {
-            return dayjs(this.complaint.reservation_date).format('DD.MM.YYYY')
+            return dayjs(this.complaint.reservation_date).format("DD.MM.YYYY");
         },
         getCleanHour() {
-            return dayjs(this.complaint.reservation_date).format('HH:mm')
+            return dayjs(this.complaint.reservation_date).format("HH:mm");
         },
         getNumberWithSpaces() {
-            const phoneNumber = this.complaint.user.phone
-            const spacedPhoneNumber = phoneNumber.replace(/(.{3})/g,"$1 ")
-            
-            return spacedPhoneNumber
+            const phoneNumber = this.complaint.user.phone;
+            const spacedPhoneNumber = phoneNumber.replace(/(.{3})/g, "$1 ");
+
+            return spacedPhoneNumber;
         },
         checkIfRefused() {
-            const rejectedStatusId = "3"
-            return this.complaint.status === rejectedStatusId ? 'refused' : ''
-        }
-    }
-}
+            const rejectedStatusId = "3";
+            return this.complaint.status === rejectedStatusId ? "refused" : "";
+        },
+    },
+};
 </script>
 
 
@@ -60,41 +68,67 @@ export default {
 @import "@@/scss/variables.scss";
 
 .card-wrapper {
-    padding:16px;
-    margin:16px 0;
+    padding: 24px;
+    margin: 24px 0;
     border: 1px solid $box-shadow-white;
     position: relative;
+
+    &:first-of-type {
+        margin-top: 0px;
+    }
     &.refused {
-        p:not(.reservation-status){
-            color:$grayish;
+        p:not(.reservation-status) {
+            color: $grayish;
         }
     }
 
     .reservation-number {
-        font-weight: bold;
         padding-bottom: 8px;
+        font-family: "Work Sans";
+        font-size: 18px;
+        line-height: 21px;
+        font-weight: 500;
     }
-    .reservation-status{
+    .reservation-details {
+        font-family: "Work Sans";
+        font-size: 16px;
+        line-height: 19px;
+        font-weight: 400;
+    }
+    .reservation-status {
         position: absolute;
-        right: 20px;
-        top: 10px;
+        right: 12px;
+        top: 12px;
         background-color: $black;
         border-radius: 20px;
-        padding:2px 6px;
-        color:$white;
+        padding: 2px 10px;
+        color: $white;
+        font-family: "Work Sans";
+        font-size: 11px;
+        line-height: 16px;
+        font-weight: 400;
 
         &.new {
             background-color: $mustard;
         }
     }
     .btns-wrapper {
-        margin:24px 0px; 
-
+        margin-top: 24px;
+        @media screen and (max-width: $breakpoint-mobile) {
+            display: flex;
+            flex-direction: column;
+        }
         button {
-            margin-right:15px;
+            margin-right: 16px;
+            
+            @media screen and (max-width: $breakpoint-mobile) {
+                margin-right: 0;
+                margin-bottom: 24px;
+                &:last-of-type {
+                    margin-bottom: 0;
+                }
+            }
         }
     }
 }
-
-
 </style>
