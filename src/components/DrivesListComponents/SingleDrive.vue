@@ -120,7 +120,7 @@ export default {
         }
         button {
             margin-right: 16px;
-            
+
             @media screen and (max-width: $breakpoint-mobile) {
                 margin-right: 0;
                 margin-bottom: 24px;

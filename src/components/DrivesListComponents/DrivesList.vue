@@ -2,7 +2,10 @@
     <section>
         <ul>
             <li v-for="complaint in complaints" :key="complaint.reservation_id">
-                <single-drive :complaint="complaint" :statuses="statuses"></single-drive>
+                <single-drive
+                    :complaint="complaint"
+                    :statuses="statuses"
+                ></single-drive>
             </li>
         </ul>
     </section>
@@ -10,15 +13,15 @@
 
 
 <script>
-import SingleDrive from './SingleDrive.vue';
+import SingleDrive from "./SingleDrive.vue";
 
 export default {
     components: { SingleDrive },
-    props:{
-        complaints:Object,
-        statuses:Object
-    }
-}
+    props: {
+        complaints: Object,
+        statuses: Object,
+    },
+};
 </script>
 
 
@@ -26,7 +29,6 @@ export default {
 @import "@@/scss/variables.scss";
 ul {
     list-style: none;
-    padding:0;
+    padding: 0;
 }
-
 </style>

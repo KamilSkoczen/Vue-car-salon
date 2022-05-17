@@ -98,9 +98,9 @@ header {
     display: flex;
     padding: 10px 0;
     @media (max-width: $breakpoint-mobile) {
-                height: auto;
-                position: relative;
-            }
+        height: auto;
+        position: relative;
+    }
 
     nav {
         color: $white;
@@ -179,7 +179,7 @@ header {
                         transform: translateX(-50%);
 
                         @media screen and (max-width: $breakpoint-mobile) {
-                            top:auto;
+                            top: auto;
                             top: 100%;
                             width: 100%;
                             max-width: inherit;
@@ -196,8 +196,8 @@ header {
                         }
 
                         li {
-                            padding:12px 16px;
-                            &:not(:last-of-type){
+                            padding: 12px 16px;
+                            &:not(:last-of-type) {
                                 border-bottom: 1px solid $milk-white;
                             }
                         }
@@ -213,7 +213,7 @@ header {
                     justify-content: space-around;
                 }
 
-                >li {
+                > li {
                     display: flex;
                     align-items: center;
                     flex-direction: row;
@@ -238,7 +238,7 @@ header {
                         }
                     }
                 }
-                a{
+                a {
                     display: flex;
                     align-items: center;
                     flex-direction: row;

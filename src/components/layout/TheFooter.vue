@@ -5,13 +5,12 @@
 </template>
 
 <style lang="scss" scoped>
-
 footer {
     height: 80px;
     display: flex;
-    align-items:center;
+    align-items: center;
     justify-content: center;
-    
+
     p {
         text-transform: uppercase;
         font-family: "Work Sans";
@@ -21,5 +20,4 @@ footer {
         letter-spacing: 1.71px;
     }
 }
-
 </style>
