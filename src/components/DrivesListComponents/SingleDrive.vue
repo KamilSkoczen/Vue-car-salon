@@ -56,7 +56,7 @@ export default {
             return spacedPhoneNumber;
         },
         checkIfRefused() {
-            const rejectedStatusId = "3";
+            const rejectedStatusId = "Odmówione";
             return this.complaint.status === rejectedStatusId ? "refused" : "";
         },
     },

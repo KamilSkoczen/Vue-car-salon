@@ -18,3 +18,4 @@ export async function fetchComplaints() {
     const data = await res.json()
     return data
 }
+

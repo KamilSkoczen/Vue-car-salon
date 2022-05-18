@@ -33,6 +33,7 @@
 import DriversFilters from "@/components/DrivesListComponents/DrivesFilters.vue";
 import DrivesList from "@/components/DrivesListComponents/DrivesList.vue";
 import { fetchsStatuses, fetchComplaints } from "@/services/complainService.js";
+import _ from "lodash";
 
 export default {
     components: {
@@ -60,6 +61,12 @@ export default {
             });
             return complaints;
         },
+        sortElements() {
+            const order = ["Nowe", "Zrealizowane", "Odmówione", "Zakończone"];
+            this.complaints = _.sortBy(this.complaints, function (obj) {
+                return _.indexOf(order, obj.status);
+            });
+        },
     },
     computed: {
         fiterDrives() {
@@ -75,6 +82,7 @@ export default {
             this.complaints = await fetchComplaints();
 
             this.changeStatusIdtoName(this.complaints, this.statuses);
+            this.sortElements()
         } catch (err) {
             this.isError = true;
         }
